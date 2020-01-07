@@ -1,7 +1,9 @@
 # 네이버쇼핑 베스트 100 남성의류 인기상품 순위(1~100위)
 # 최근 2일/7일 기준 네이버쇼핑을 통한 판매실적과 상품클릭수를 반영하여 매일 업데이트
 
-import urllib.request
+# 맥과의 호환을 위해 urllib.request대신 requests를 사용, 속도면에서도 requests가 유리
+#import urllib.request
+import requests
 import bs4
 import json
 import csv
@@ -53,13 +55,12 @@ now = datetime.now().strftime("%Y.%m.%d")
 createFolder("./product100/" + now + "_best100")
 
 for k, v in keywords.items():
-    #print("Key: ", k, " ", "Value: ", v)
     keyword = k
     keywordValue = str(v)
 
     url = "https://search.shopping.naver.com/best100v2/detail/prod.nhn?catId=" + keywordValue
-    html = urllib.request.urlopen(url)
-    bs_obj = bs4.BeautifulSoup(html, "html.parser")
+    html = requests.get(url)
+    bs_obj = bs4.BeautifulSoup(html.text, "html.parser")
 
     #
     div_srgoods = bs_obj.find("div", id="productListArea")

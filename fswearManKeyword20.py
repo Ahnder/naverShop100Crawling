@@ -2,7 +2,9 @@
 # 남성의류 인기검색어
 # 일간 인기검색어해당 일자 기준 클릭이 발생한 검색어의 클릭량을 반영한 순위
 
-import urllib.request
+# 맥과의 호환을 위해 urllib.request대신 requests를 사용
+#import urllib.request
+import requests
 import bs4
 import json
 import csv
@@ -38,14 +40,13 @@ keywords = {"기본" : 50000169, "니트_스웨터" : 50000831, "티셔츠" : 50
             "레인코트" : 50000844, "코디세트" : 50006328}
 
 for k, v in keywords.items():
-    #print("Key: ", k, " ", "Value: ", v)
     keyword = k
     keywordValue = str(v)
 
     url = "https://search.shopping.naver.com/best100v2/detail/kwd.nhn?catId=" + keywordValue + "&kwdType=KWD"
-    html = urllib.request.urlopen(url)
+    html = requests.get(url)
 
-    bs_obj = bs4.BeautifulSoup(html, "html.parser")
+    bs_obj = bs4.BeautifulSoup(html.text, "html.parser")
 
     # 날짜
     div_srch_date = bs_obj.find("div", id="calendarDate")
