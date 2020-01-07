@@ -2,8 +2,6 @@
 # 남성의류 인기검색어
 # 일간 인기검색어해당 일자 기준 클릭이 발생한 검색어의 클릭량을 반영한 순위
 
-# 맥과의 호환을 위해 urllib.request대신 requests를 사용
-#import urllib.request
 import requests
 import bs4
 import json

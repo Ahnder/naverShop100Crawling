@@ -1,8 +1,6 @@
 # 네이버쇼핑 베스트 100 남성의류 인기상품 순위(1~100위)
 # 최근 2일/7일 기준 네이버쇼핑을 통한 판매실적과 상품클릭수를 반영하여 매일 업데이트
 
-# 맥과의 호환을 위해 urllib.request대신 requests를 사용, 속도면에서도 requests가 유리
-#import urllib.request
 import requests
 import bs4
 import json
@@ -69,7 +67,7 @@ def getSrchList(lis):
     price = div_price.find("strong").text
 
     return {"순위":rnk, "상품명":prdname, "가격":price}
-        
+
 # 각 url catId 딕셔너리
 keywords = {"기본" : 50000169, "니트_스웨터" : 50000831, "티셔츠" : 50000830, "셔츠_남방" : 50000833, 
             "카디건" : 50000832, "점퍼" : 50000837, "재킷" : 50000838, "코트" : 50000839,
